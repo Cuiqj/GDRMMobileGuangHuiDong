@@ -35,9 +35,10 @@
 
 //读取案号对应的勘验记录
 +(CaseProveInfo *)proveInfoForCase:(NSString *)caseID;
-
+//生成案号对应的勘验记录描述
++ (NSString *)generateEventDesc:(NSString *)caseID;
 + (NSString *)generateEventDescForCase:(NSString *)caseID;
-
++(CaseProveInfo *)proveInfoForCase:(NSString *)caseID citizenName:(NSString*)citizeName;
 - (NSString *) case_mark2;
 - (NSString *) full_case_mark3;
 - (NSString *) weater;

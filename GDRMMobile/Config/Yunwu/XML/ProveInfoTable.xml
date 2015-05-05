@@ -176,7 +176,7 @@
                 <size width="72" height="17" />
             </Text>
             <Text>
-                <text>勘验情况及结果：</text>
+                <text>经现场勘验，确定情况如下：</text>
                 <fontSize>12</fontSize>
                 <origin x="27" y="100.5" />
                 <size width="144" height="17" />

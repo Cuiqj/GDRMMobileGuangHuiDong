@@ -26,6 +26,7 @@
 -(NSString *)getCaseIDDelegate;
 -(NSString *)getNexusDelegate;
 -(NSString *)getAskIDDelegate;
+-(Citizen *)getCitizen;
 -(void)setAskSentence:(NSString *)askSentence withAskID:(NSString *)askID;
 -(void)setAnswerSentence:(NSString *)answerSentence;
 @end

@@ -15,5 +15,5 @@
 @property (nonatomic, retain) NSString * myid;
 @property (nonatomic, retain) NSString * the_index;
 @property (nonatomic, retain) NSString * sentence;
-
++(void)deleteInsertRecord:(NSString *)myId;
 @end

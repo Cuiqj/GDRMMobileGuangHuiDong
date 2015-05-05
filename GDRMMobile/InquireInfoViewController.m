@@ -778,4 +778,8 @@ enum kUITextFieldTag {
     [self.listSelectPopover presentPopoverFromRect:rect inView:self.view permittedArrowDirections:UIPopoverArrowDirectionLeft animated:YES];
 }
 
+-(Citizen *)getCitizen{
+    return [Citizen citizenForParty:self.textParty.text case:self.caseID];
+}
+
 @end

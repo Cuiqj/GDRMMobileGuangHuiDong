@@ -46,9 +46,13 @@
 
 
 #define VERSION_NAME @"广惠东路政"
-#define VERSION_TIME @"2015年02月03日"
+#define VERSION_TIME @"2015年04月08日"
 /*
  *add by lxm
  */
 #define MMTOPIX 2.83f
 #define SCALEFACTOR 1.0017f
+
+
+
+#define BREAK_TWO_RULES @"《中华人民共和国公路法》第四十六条、第五十二条"

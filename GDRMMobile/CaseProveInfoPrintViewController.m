@@ -97,7 +97,7 @@ static NSString * const xmlName = @"ProveInfoTable";
     }
 
     if ([caseProveInfo.event_desc length] <= 0) {
-        caseProveInfo.event_desc = [CaseProveInfo generateEventDescForCase:self.caseID];
+        caseProveInfo.event_desc = [CaseProveInfo generateEventDesc:self.caseID];
     }
 
     [[AppDelegate App] saveContext];
@@ -105,7 +105,7 @@ static NSString * const xmlName = @"ProveInfoTable";
 
 - (IBAction)reFormEvetDesc:(UIButton *)sender {
     [self pageSaveInfo];
-    self.textevent_desc.text = [CaseProveInfo generateEventDescForCase:self.caseID];
+    self.textevent_desc.text = [CaseProveInfo generateEventDesc:self.caseID];
 }
 
 

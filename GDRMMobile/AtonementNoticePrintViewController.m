@@ -160,7 +160,9 @@ static NSString * xmlName = @"AtonementNoticeTable";
     [codeFormatter setLocale:[NSLocale currentLocale]];
     notice.code = [codeFormatter stringFromDate:[NSDate date]];
     NSRange range = [proveInfo.event_desc rangeOfString:@"于"];
-    notice.case_desc = [proveInfo.event_desc substringFromIndex:range.location+1];
+    if (range.location != NSNotFound) {
+        notice.case_desc = [proveInfo.event_desc substringFromIndex:range.location+1];
+    }
     notice.citizen_name = proveInfo.citizen_name;
     notice.witness = @"现场照片、勘验检查笔录、询问笔录、现场勘验图";
     notice.check_organization = @"广东省公路管理局";
@@ -211,7 +213,7 @@ static NSString * xmlName = @"AtonementNoticeTable";
             }
         }
 
-        payReason = [NSString stringWithFormat:@"%@%@的违法事实清楚，其行为违反了%@规定，根据%@、并依照%@的规定，当事人应当承担民事责任，赔偿路产损失。", citizen.party, proveInfo.case_short_desc, breakStr, matchStr, payStr];
+        payReason = [NSString stringWithFormat:@"%@由于交通事故造成公路路产损失，应按照%@规定，依法承担民事责任。根据%@、并依照%@的规定，当事人应当承担民事责任，赔偿路产损失。", citizen.party,  breakStr, matchStr, payStr];
         
     }
     notice.pay_reason = payReason;

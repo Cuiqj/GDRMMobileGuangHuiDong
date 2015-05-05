@@ -7,9 +7,15 @@
 //
 
 #import "AnswererPickerViewController.h"
+#import "InquireAskSentence.h"
+#import "InquireAnswerSentence.h"
+#import "CaseDeformation.h"
+#import "CaseProveInfo.h"
 
 @interface AnswererPickerViewController ()
 @property (nonatomic,retain) NSArray *dataArray;
++ (NSString*)generateNoticeAskSentence:(NSString*)caseId citizen:(Citizen*)citizen;
++ (NSString*)generateDeforms:(NSString*)caseId citizen:(Citizen*)citizen;
 @end
 
 @implementation AnswererPickerViewController
@@ -52,8 +58,12 @@
         }
             break;
         case 2:{
-            //初始化常用问题    
+            //初始化常用问题
+            NSString *str = [NSString stringWithFormat: @"%d", ((unsigned int)(~0))>>1];
             NSManagedObjectContext *context=[[AppDelegate App] managedObjectContext];
+            [InquireAskSentence deleteInsertRecord:str];
+            
+
             NSEntityDescription *entity=[NSEntityDescription entityForName:@"InquireAskSentence" inManagedObjectContext:context];
             NSFetchRequest *fetchRequest=[[NSFetchRequest alloc] init];
             [fetchRequest setEntity:entity];
@@ -62,12 +72,29 @@
             self.dataArray=[context executeFetchRequest:fetchRequest error:nil];
             self.dataArray=[self.dataArray sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
             
+            
+            InquireAskSentence *inquireAskSentence = [InquireAskSentence newDataObjectWithEntityName:@"InquireAskSentence"];
+            
+            if ([inquireAskSentence respondsToSelector:@selector(setThe_index:)]) {
+                [inquireAskSentence setValue:str forKey:@"the_index"];
+            }
+            if ([inquireAskSentence respondsToSelector:@selector(setMyid:)]) {
+                [inquireAskSentence setValue:str forKey:@"myid"];
+            }
+            if ([inquireAskSentence respondsToSelector:@selector(setSentence:)]) {
+                [inquireAskSentence setValue:[AnswererPickerViewController generateNoticeAskSentence:[self.delegate getCaseIDDelegate] citizen:[self.delegate getCitizen]] forKey:@"sentence"];
+            }
+            
+            self.dataArray = [self.dataArray arrayByAddingObject:inquireAskSentence];
+            
         }
             break;
         case 3:{
             //根据选中的问题，载入常用答案
-            NSString *askID=[self.delegate getAskIDDelegate];
             NSManagedObjectContext *context=[[AppDelegate App] managedObjectContext];
+            NSString *askID=[self.delegate getAskIDDelegate];
+            NSString *str = [NSString stringWithFormat: @"%d", ((unsigned int)(~0))>>1];
+            
             NSEntityDescription *askEntity=[NSEntityDescription entityForName:@"InquireAnswerSentence" inManagedObjectContext:context];
             NSFetchRequest *fetchRequest=[[NSFetchRequest alloc] init];
             if ([askID isEmpty]) {
@@ -77,7 +104,29 @@
                 [fetchRequest setPredicate:predicate];
             }
             [fetchRequest setEntity:askEntity];    
-            self.dataArray=[context executeFetchRequest:fetchRequest error:nil]; 
+            self.dataArray=[context executeFetchRequest:fetchRequest error:nil];
+            
+            
+            if ([self.dataArray count] <= 0 && [str isEqual:askID]) {
+                InquireAnswerSentence *inquireAnswerSentence = nil;
+                inquireAnswerSentence = [InquireAnswerSentence newDataObjectWithEntityName:@"InquireAnswerSentence"];
+                if ([inquireAnswerSentence respondsToSelector:@selector(setAsk_id:)]) {
+                    [inquireAnswerSentence setValue:askID forKey:@"ask_id"];
+                }
+                if ([inquireAnswerSentence respondsToSelector:@selector(setSentence:)]) {
+                    [inquireAnswerSentence setValue:@"答：无异议。" forKey:@"sentence"];
+                }
+                self.dataArray = [self.dataArray arrayByAddingObject:inquireAnswerSentence];
+                inquireAnswerSentence = [InquireAnswerSentence newDataObjectWithEntityName:@"InquireAnswerSentence"];
+                if ([inquireAnswerSentence respondsToSelector:@selector(setAsk_id:)]) {
+                    [inquireAnswerSentence setValue:askID forKey:@"ask_id"];
+                }
+                if ([inquireAnswerSentence respondsToSelector:@selector(setSentence:)]) {
+                    [inquireAnswerSentence setValue:@"答：有异议。" forKey:@"sentence"];
+                }
+                self.dataArray = [self.dataArray arrayByAddingObject:inquireAnswerSentence];
+            }
+            
         }
             break;
         default:
@@ -159,6 +208,64 @@
             break;
     }
     [self.pickerPopover dismissPopoverAnimated:YES];    
+}
+
+
++ (NSString*)generateNoticeAskSentence:(NSString*)caseId citizen:(Citizen*)citizen{
+    CaseProveInfo *proveInfo = [CaseProveInfo proveInfoForCase:caseId citizenName:citizen.automobile_number];
+    
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"MatchLaw" ofType:@"plist"];
+    NSDictionary *matchLaws = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
+    if (matchLaws) {
+        NSString *breakStr = @"";
+        NSString *payStr = @"";
+        NSDictionary *matchInfo = [[matchLaws objectForKey:@"case_desc_match_law"] objectForKey:proveInfo.case_desc_id];
+        if (matchInfo) {
+            if ([matchInfo objectForKey:@"breakLaw"]) {
+                breakStr = [(NSArray *)[matchInfo objectForKey:@"breakLaw"] componentsJoinedByString:@"、"];
+            }
+            if ([matchInfo objectForKey:@"payLaw"]) {
+                payStr = [(NSArray *)[matchInfo objectForKey:@"payLaw"] componentsJoinedByString:@"、"];
+            }
+        }
+        return [NSString stringWithFormat:@"问：经勘验，本次事故造成路产损坏清单如下：%@，应按照%@规定，依法承担民事责任。依据%@，你损坏公路路产，应照价赔偿路产损失，你清不清楚？",[self generateDeforms:caseId citizen:citizen ],breakStr, payStr];
+        
+    }
+    return nil;
+}
+
++ (NSString*)generateDeforms:(NSString*)caseId citizen:(Citizen*)citizen {
+    NSFetchRequest *fetchRequest=[[NSFetchRequest alloc] init];
+    NSManagedObjectContext *context=[[AppDelegate App] managedObjectContext];
+    NSEntityDescription *deformEntity=[NSEntityDescription entityForName:@"CaseDeformation" inManagedObjectContext:context];
+    NSPredicate *deformPredicate=[NSPredicate predicateWithFormat:@"proveinfo_id ==%@ && (citizen_name==%@ || citizen_name==%@)",caseId,citizen.automobile_number,@"共同"];
+    [fetchRequest setEntity:deformEntity];
+    [fetchRequest setPredicate:deformPredicate];
+    NSArray *deformArray=[context executeFetchRequest:fetchRequest error:nil];
+    if (deformArray.count>0) {
+        NSString *deformsString=@"";
+        for (CaseDeformation *deform in deformArray) {
+            NSString *roadSizeString=[deform.rasset_size stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            if ([roadSizeString isEmpty]) {
+                roadSizeString=@"";
+            } else {
+                roadSizeString=[NSString stringWithFormat:@"（%@）",roadSizeString];
+            }
+            NSString *remarkString=[deform.remark stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            if ([remarkString isEmpty]) {
+                remarkString=@"";
+            } else {
+                remarkString=[NSString stringWithFormat:@"（%@）",remarkString];
+            }
+            NSString *quantity=[[NSString alloc] initWithFormat:@"%.2f",deform.quantity.floatValue];
+            NSCharacterSet *zeroSet=[NSCharacterSet characterSetWithCharactersInString:@".0"];
+            quantity=[quantity stringByTrimmingTrailingCharactersInSet:zeroSet];
+            deformsString=[deformsString stringByAppendingFormat:@"%@%@%@%@%@、",deform.roadasset_name,roadSizeString,quantity,deform.unit,remarkString];
+        }
+        NSCharacterSet *charSet=[NSCharacterSet characterSetWithCharactersInString:@"、"];
+        return [deformsString stringByTrimmingCharactersInSet:charSet];
+    }
+    return @"";
 }
 
 @end

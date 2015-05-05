@@ -66,7 +66,21 @@
         return nil;
     }
 }
-
+//读取案号对应的勘验记录
++(CaseProveInfo *)proveInfoForCase:(NSString *)caseID citizenName:(NSString*)citizeName{
+    NSManagedObjectContext *context=[[AppDelegate App] managedObjectContext];
+    NSEntityDescription *entity=[NSEntityDescription entityForName:@"CaseProveInfo" inManagedObjectContext:context];
+    NSFetchRequest *fetchRequest=[[NSFetchRequest alloc] init];
+    NSPredicate *predicate=[NSPredicate predicateWithFormat:@"caseinfo_id==%@ && citizen_name==%@",caseID,citizeName];
+    fetchRequest.predicate=predicate;
+    fetchRequest.entity=entity;
+    NSArray *fetchResult=[context executeFetchRequest:fetchRequest error:nil];
+    if (fetchResult.count>0) {
+        return [fetchResult objectAtIndex:0];
+    } else {
+        return nil;
+    }
+}
 + (NSString *)generateEventDescForCase:(NSString *)caseID{
     CaseInfo *caseInfo=[CaseInfo caseInfoForID:caseID];
     NSString *roadName=[RoadSegment roadNameFromSegment:caseInfo.roadsegment_id];
@@ -244,6 +258,178 @@
     return caseDescString;
 }
 
++ (NSString *)generateEventDesc:(NSString *)caseID{
+    CaseInfo *caseInfo = [CaseInfo caseInfoForID:caseID];
+    NSString *roadName = [RoadSegment roadNameFromSegment:caseInfo.roadsegment_id];
+    
+    
+    
+    NSManagedObjectContext *context = [[AppDelegate App] managedObjectContext];
+    
+    //格式化案件发生时间
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setLocale:[NSLocale currentLocale]];
+    [dateFormatter setDateFormat:@"yyyy年MM月dd日HH时mm分"];
+    NSString *happenDate = [dateFormatter stringFromDate:caseInfo.happen_date];
+    
+    
+    //发生事故的桩号范围
+    NSNumberFormatter *numFormatter = [[NSNumberFormatter alloc] init];
+    [numFormatter setPositiveFormat:@"000"];
+    NSString *stationStartKMString = [NSString stringWithFormat:@"%02d", caseInfo.station_start.integerValue/1000];
+    NSString *stationStartMString = [numFormatter stringFromNumber:[NSNumber numberWithInteger:caseInfo.station_start.integerValue % 1000]];
+    NSString *stationString = [NSString stringWithFormat:@"K%@+%@M",stationStartKMString,stationStartMString];
+    
+    //伤亡情况
+    NSString *caseStatusString = @"";
+    if (caseInfo.fleshwound_sum.integerValue == 0 && caseInfo.badwound_sum.integerValue == 0 && caseInfo.death_sum.integerValue == 0) {
+        caseStatusString=[caseStatusString stringByAppendingString:@"无人员伤亡，"];
+    } else {
+        caseStatusString=@"造成";
+        if (caseInfo.fleshwound_sum.integerValue!=0) {
+            caseStatusString=[caseStatusString stringByAppendingFormat:@"轻伤%@人，",caseInfo.fleshwound_sum];
+        }
+        if (caseInfo.badwound_sum.integerValue!=0) {
+            caseStatusString=[caseStatusString stringByAppendingFormat:@"重伤%@人，",caseInfo.badwound_sum];
+        }
+        if (caseInfo.death_sum.integerValue!=0) {
+            caseStatusString=[caseStatusString stringByAppendingFormat:@"死亡%@人，",caseInfo.death_sum];
+        }
+    }
+    
+    NSString *caseDescString = @"";
+    
+    NSArray *citizenArray = [Citizen allCitizenNameForCase:caseID];
+    if (citizenArray.count > 0) {
+        if (citizenArray.count == 1) {//当事人只有一个人的时候
+            Citizen *citizen = [citizenArray objectAtIndex:0];
+            if (caseInfo.badcar_sum.integerValue!=0) {
+                caseStatusString = [caseStatusString stringByAppendingFormat:@"车辆%@损坏",citizen.bad_desc];
+            } else {
+                caseStatusString = [caseStatusString stringByAppendingString:@"未造成车辆损坏"];
+            }
+            
+            caseDescString = [caseDescString stringByAppendingFormat:@"   %@,%@驾驶的%@%@在%@%@%@%@行驶时，因交通事故造成路产损坏。\n现场可见：\n事故共造成：",happenDate,citizen.party,citizen.automobile_number,citizen.automobile_pattern,roadName,caseInfo.side,stationString,[caseInfo.place stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
+            
+            NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+            NSEntityDescription *deformEntity = [NSEntityDescription entityForName:@"CaseDeformation" inManagedObjectContext:context];
+            NSPredicate *deformPredicate = [NSPredicate predicateWithFormat:@"proveinfo_id ==%@ && citizen_name==%@",caseID,citizen.automobile_number];
+            [fetchRequest setEntity:deformEntity];
+            [fetchRequest setPredicate:deformPredicate];
+            NSArray *deformArray = [context executeFetchRequest:fetchRequest error:nil];
+            if (deformArray.count > 0) {
+                NSString *deformsString = @"";
+                for (CaseDeformation *deform in deformArray) {
+                    NSString *roadSizeString = [deform.rasset_size stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                    if ([roadSizeString isEmpty]) {
+                        roadSizeString = @"";
+                    } else {
+                        roadSizeString = [NSString stringWithFormat:@"（%@）",roadSizeString];
+                    }
+                    NSString *remarkString = [deform.remark stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                    if ([remarkString isEmpty]) {
+                        remarkString = @"";
+                    } else {
+                        
+                        remarkString = [NSString stringWithFormat:@"（%@）",remarkString];
+                    }
+                    NSString *quantity = [[NSString alloc] initWithFormat:@"%.2f",deform.quantity.floatValue];
+                    NSCharacterSet *zeroSet = [NSCharacterSet characterSetWithCharactersInString:@".0"];
+                    quantity = [quantity stringByTrimmingTrailingCharactersInSet:zeroSet];
+                    deformsString = [deformsString stringByAppendingFormat:@"、%@%@%@%@%@",deform.roadasset_name,roadSizeString,quantity,deform.unit,remarkString];
+                }
+                NSCharacterSet *charSet = [NSCharacterSet characterSetWithCharactersInString:@"、"];
+                deformsString = [deformsString stringByTrimmingCharactersInSet:charSet];
+                caseDescString = [caseDescString stringByAppendingFormat:@"%@。",deformsString];
+            } else {
+                caseDescString = [caseDescString stringByAppendingString:@"没有路产损坏。"];
+            }
+        }
+        if (citizenArray.count>1) {
+            Citizen *citizen=[citizenArray objectAtIndex:0];
+            caseDescString=[caseDescString stringByAppendingFormat:@"%@于%@驾驶%@%@行至%@%@%@，与",citizen.party,happenDate,citizen.automobile_number,citizen.automobile_pattern,roadName,caseInfo.side,stationString];
+            for (int i=1;i<citizenArray.count;i++) {
+                citizen=[citizenArray objectAtIndex:i];
+                if (i==1) {
+                    caseDescString=[caseDescString stringByAppendingFormat:@"%@驾驶的%@%@",citizen.party,citizen.automobile_number,citizen.automobile_pattern];
+                } else {
+                    caseDescString=[caseDescString stringByAppendingFormat:@"、%@驾驶的%@%@",citizen.party,citizen.automobile_number,citizen.automobile_pattern];
+                }
+            }
+            caseDescString=[caseDescString stringByAppendingFormat:@"在公路%@由于%@发生碰撞，造成交通事故，%@，经与当事人现场勘查，",caseInfo.place,caseInfo.case_reason,caseStatusString];
+            
+            NSArray *deformArray=[CaseDeformation deformationsForCase:caseID];
+            NSString *roadAssetString=@"";
+            NSString *deformsString=@"";
+            NSCharacterSet *charSet=[NSCharacterSet characterSetWithCharactersInString:@"、"];
+            for (int i=0; i<citizenArray.count; i++) {
+                roadAssetString=@"";
+                for (CaseDeformation *deform in deformArray) {
+                    if ([deform.citizen_name isEqualToString:[[citizenArray objectAtIndex:i] automobile_number]]) {
+                        NSString *roadSizeString = [deform.rasset_size stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                        if ([roadSizeString isEmpty]) {
+                            roadSizeString=@"";
+                        } else {
+                            roadSizeString=[NSString stringWithFormat:@"（%@）",roadSizeString];
+                        }
+                        NSString *remarkString=[deform.remark stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                        if ([remarkString isEmpty]) {
+                            remarkString=@"";
+                        } else {
+                            remarkString=[NSString stringWithFormat:@"（%@）",remarkString];
+                        }
+                        NSString *quantity=[[NSString alloc] initWithFormat:@"%.2f",deform.quantity.floatValue];
+                        NSCharacterSet *zeroSet=[NSCharacterSet characterSetWithCharactersInString:@".0"];
+                        quantity=[quantity stringByTrimmingTrailingCharactersInSet:zeroSet];
+                        roadAssetString=[roadAssetString stringByAppendingFormat:@"、%@%@%@%@%@",deform.roadasset_name,roadSizeString,quantity,deform.unit,remarkString];
+                    }
+                }
+                roadAssetString=[roadAssetString stringByTrimmingCharactersInSet:charSet];
+                if (![roadAssetString isEmpty]) {
+                    deformsString=[deformsString stringByAppendingFormat:@"%@损坏路产：%@，",[[citizenArray objectAtIndex:i] automobile_number],roadAssetString];
+                }
+            }
+            roadAssetString=@"";
+            for (CaseDeformation *deform in deformArray) {
+                if ([deform.citizen_name isEqualToString:@"共同"]) {
+                    NSString *roadSizeString=[deform.rasset_size stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                    if ([roadSizeString isEmpty]) {
+                        roadSizeString=@"";
+                    } else {
+                        roadSizeString=[NSString stringWithFormat:@"（%@）",roadSizeString];
+                    }
+                    NSString *remarkString=[deform.remark stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                    if ([remarkString isEmpty]) {
+                        remarkString=@"";
+                    } else {
+                        remarkString=[NSString stringWithFormat:@"（%@）",remarkString];
+                    }
+                    NSString *quantity=[[NSString alloc] initWithFormat:@"%.2f",deform.quantity.floatValue];
+                    NSCharacterSet *zeroSet=[NSCharacterSet characterSetWithCharactersInString:@".0"];
+                    quantity=[quantity stringByTrimmingTrailingCharactersInSet:zeroSet];
+                    roadAssetString=[roadAssetString stringByAppendingFormat:@"、%@%@%@%@%@",deform.roadasset_name,roadSizeString,quantity,deform.unit,remarkString];
+                }
+            }
+            roadAssetString=[roadAssetString stringByTrimmingCharactersInSet:charSet];
+            if (![roadAssetString isEmpty]) {
+                NSString *citizenString=@"";
+                for (int i=0; i<citizenArray.count; i++) {
+                    citizenString=[citizenString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                    citizenString=[citizenString stringByAppendingFormat:@"%@%@",([citizenString isEmpty]?@"":@"、"),[[citizenArray objectAtIndex:i] automobile_number]];
+                }
+                citizenString=[citizenString stringByTrimmingTrailingCharactersInSet:charSet];
+                deformsString=[deformsString stringByAppendingFormat:@"%@共同损坏路产：%@，",[citizenString stringByTrimmingTrailingCharactersInSet:charSet],roadAssetString];
+            }
+            if (![deformsString isEmpty]) {
+                NSCharacterSet *commaSet=[NSCharacterSet characterSetWithCharactersInString:@"，"];
+                caseDescString=[caseDescString stringByAppendingFormat:@"%@。",[deformsString stringByTrimmingTrailingCharactersInSet:commaSet]];
+            } else {
+                caseDescString=[caseDescString stringByAppendingString:@"没有路产损坏。"];
+            }
+        }
+    }
+    return caseDescString;
+}
 
 - (NSString *) case_mark2{
     if (!_caseInfo) {

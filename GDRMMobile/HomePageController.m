@@ -117,5 +117,17 @@
         [self performSegueWithIdentifier:@"toInspectionOutFromMain" sender:nil];
     }
 }
+- (void)viewDidLoad{
+    [super viewDidLoad];
+    if([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
+    {
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+        self.extendedLayoutIncludesOpaqueBars = NO;
+        self.modalPresentationCapturesStatusBarAppearance = NO;
+        self.navigationController.navigationBar.translucent = NO;
+        self.tabBarController.tabBar.translucent = NO;
+    }
+    
+}
 
 @end

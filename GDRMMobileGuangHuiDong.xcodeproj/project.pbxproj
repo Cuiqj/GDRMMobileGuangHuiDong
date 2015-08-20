@@ -538,9 +538,9 @@
 		33A5274A14F4E3E6009BC91E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		33A5274C14F4E3E6009BC91E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		33A5274E14F4E3E6009BC91E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		33A5275214F4E3E6009BC91E /* GDRMMobile-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GDRMMobile-Info.plist"; sourceTree = "<group>"; };
+		33A5275214F4E3E6009BC91E /* GDRMMobileGuangHuiDong-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GDRMMobileGuangHuiDong-Info.plist"; sourceTree = "<group>"; };
 		33A5275614F4E3E6009BC91E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		33A5275814F4E3E6009BC91E /* GDRMMobile-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GDRMMobile-Prefix.pch"; sourceTree = "<group>"; };
+		33A5275814F4E3E6009BC91E /* GDRMMobileGuangHuiDong-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GDRMMobileGuangHuiDong-Prefix.pch"; sourceTree = "<group>"; };
 		33A5275914F4E3E6009BC91E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		33A5275A14F4E3E6009BC91E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		33A5276E14F4E5FA009BC91E /* HomePageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageController.h; sourceTree = "<group>"; };
@@ -1275,8 +1275,8 @@
 				339BC5BD16BF592B002AE80F /* Font */,
 				803202D21804B9D00046843E /* Config */,
 				3379F26615639F5000C580E7 /* DataModelsHeader.h */,
-				33A5275214F4E3E6009BC91E /* GDRMMobile-Info.plist */,
-				33A5275814F4E3E6009BC91E /* GDRMMobile-Prefix.pch */,
+				33A5275214F4E3E6009BC91E /* GDRMMobileGuangHuiDong-Info.plist */,
+				33A5275814F4E3E6009BC91E /* GDRMMobileGuangHuiDong-Prefix.pch */,
 				B30D427216552939009F62A2 /* InfoPlist.strings */,
 				33A5275614F4E3E6009BC91E /* main.m */,
 				33A9032C14FDD7F9006587A7 /* outer-icon.png */,
@@ -1672,9 +1672,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		33A5274514F4E3E6009BC91E /* GDRMMobile */ = {
+		33A5274514F4E3E6009BC91E /* GDRMMobileGuangHuiDong */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 33A5276414F4E3E6009BC91E /* Build configuration list for PBXNativeTarget "GDRMMobile" */;
+			buildConfigurationList = 33A5276414F4E3E6009BC91E /* Build configuration list for PBXNativeTarget "GDRMMobileGuangHuiDong" */;
 			buildPhases = (
 				33A5274214F4E3E6009BC91E /* Sources */,
 				33A5274314F4E3E6009BC91E /* Frameworks */,
@@ -1684,7 +1684,7 @@
 			);
 			dependencies = (
 			);
-			name = GDRMMobile;
+			name = GDRMMobileGuangHuiDong;
 			productName = GDRMMobile;
 			productReference = 33A5274614F4E3E6009BC91E /* GDRMMobile.app */;
 			productType = "com.apple.product-type.application";
@@ -1697,7 +1697,7 @@
 			attributes = {
 				LastUpgradeCheck = 0430;
 			};
-			buildConfigurationList = 33A5274014F4E3E6009BC91E /* Build configuration list for PBXProject "GDRMMobile" */;
+			buildConfigurationList = 33A5274014F4E3E6009BC91E /* Build configuration list for PBXProject "GDRMMobileGuangHuiDong" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1709,7 +1709,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				33A5274514F4E3E6009BC91E /* GDRMMobile */,
+				33A5274514F4E3E6009BC91E /* GDRMMobileGuangHuiDong */,
 			);
 		};
 /* End PBXProject section */
@@ -2027,8 +2027,8 @@
 				HEADER_SEARCH_PATHS = "/usr/include/libxml2/**";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = "-lxml2";
-				PROVISIONING_PROFILE = "b9284b2b-88bd-4def-baee-7572387d4bcd";
-				"PROVISIONING_PROFILE[sdk=*]" = "b9284b2b-88bd-4def-baee-7572387d4bcd";
+				PROVISIONING_PROFILE = "3d765be2-ef97-434d-a007-3091d19481ab";
+				"PROVISIONING_PROFILE[sdk=*]" = "3d765be2-ef97-434d-a007-3091d19481ab";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -2053,8 +2053,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = "-lxml2";
-				PROVISIONING_PROFILE = "b9284b2b-88bd-4def-baee-7572387d4bcd";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "b9284b2b-88bd-4def-baee-7572387d4bcd";
+				PROVISIONING_PROFILE = "3d765be2-ef97-434d-a007-3091d19481ab";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3d765be2-ef97-434d-a007-3091d19481ab";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
@@ -2067,13 +2067,13 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Guangzhou Zhongjiao Yuke Spatial Information Technology Co., Ltd. (97S66GFTED)";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: Guangzhou Zhongjiao Yuke Spatial Information Technology Co., Ltd. (97S66GFTED)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "GDRMMobile/GDRMMobile-Prefix.pch";
+				GCC_PREFIX_HEADER = "GDRMMobile/GDRMMobileGuangHuiDong-Prefix.pch";
 				HEADER_SEARCH_PATHS = /usr/include/libxml2/;
-				INFOPLIST_FILE = "GDRMMobile/GDRMMobile-Info.plist";
+				INFOPLIST_FILE = "GDRMMobile/GDRMMobileGuangHuiDong-Info.plist";
 				OTHER_LDFLAGS = "-lxml2";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b9284b2b-88bd-4def-baee-7572387d4bcd";
-				"PROVISIONING_PROFILE[sdk=*]" = "b9284b2b-88bd-4def-baee-7572387d4bcd";
+				PRODUCT_NAME = GDRMMobileGuangHuiDong;
+				PROVISIONING_PROFILE = "6369a086-7c65-43af-babb-ac52a6f4fca5";
+				"PROVISIONING_PROFILE[sdk=*]" = "6369a086-7c65-43af-babb-ac52a6f4fca5";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -2085,13 +2085,13 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Guangzhou Zhongjiao Yuke Spatial Information Technology Co., Ltd. (97S66GFTED)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Guangzhou Zhongjiao Yuke Spatial Information Technology Co., Ltd. (97S66GFTED)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "GDRMMobile/GDRMMobile-Prefix.pch";
+				GCC_PREFIX_HEADER = "GDRMMobile/GDRMMobileGuangHuiDong-Prefix.pch";
 				HEADER_SEARCH_PATHS = /usr/include/libxml2/;
-				INFOPLIST_FILE = "GDRMMobile/GDRMMobile-Info.plist";
+				INFOPLIST_FILE = "GDRMMobile/GDRMMobileGuangHuiDong-Info.plist";
 				OTHER_LDFLAGS = "-lxml2";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b9284b2b-88bd-4def-baee-7572387d4bcd";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "b9284b2b-88bd-4def-baee-7572387d4bcd";
+				PRODUCT_NAME = GDRMMobileGuangHuiDong;
+				PROVISIONING_PROFILE = "6369a086-7c65-43af-babb-ac52a6f4fca5";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6369a086-7c65-43af-babb-ac52a6f4fca5";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -2100,7 +2100,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		33A5274014F4E3E6009BC91E /* Build configuration list for PBXProject "GDRMMobile" */ = {
+		33A5274014F4E3E6009BC91E /* Build configuration list for PBXProject "GDRMMobileGuangHuiDong" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				33A5276214F4E3E6009BC91E /* Debug */,
@@ -2109,7 +2109,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		33A5276414F4E3E6009BC91E /* Build configuration list for PBXNativeTarget "GDRMMobile" */ = {
+		33A5276414F4E3E6009BC91E /* Build configuration list for PBXNativeTarget "GDRMMobileGuangHuiDong" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				33A5276514F4E3E6009BC91E /* Debug */,

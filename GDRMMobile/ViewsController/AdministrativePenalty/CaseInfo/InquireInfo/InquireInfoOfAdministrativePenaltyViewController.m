@@ -63,7 +63,7 @@ enum kUITextFieldTag {
 @synthesize askID=_askID;
 @synthesize answererName=_answererName;
 @synthesize delegate=_delegate;
-
+@synthesize navigationBar2 = _navigationBar2;
 #pragma mark - init on get
 - (NSArray *)users{
     if (_users == nil) {
@@ -85,6 +85,9 @@ enum kUITextFieldTag {
     self.textAnswer.text=@"";
     inquireSaved=YES;
     self.textNexus.text=@"当事人";
+	[_navigationBar2 setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    _navigationBar2.shadowImage = [[UIImage alloc] init];
+	
     
     // 分配tag add by xushiwen in 2013.7.26
     self.textAsk.tag = kUITextFieldTagAsk;
@@ -96,8 +99,7 @@ enum kUITextFieldTag {
     self.textFieldInquirer.tag = kUITextFieldTagInquirer;
     self.textFieldRecorder.tag = kUITextFieldTagRecorder;
     
-    NSString *imagePath=[[NSBundle mainBundle] pathForResource:@"询问笔录-bg" ofType:@"png"];
-    self.view.layer.contents=(id)[[UIImage imageWithContentsOfFile:imagePath] CGImage];
+
     
     //监视键盘出现和隐藏通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];

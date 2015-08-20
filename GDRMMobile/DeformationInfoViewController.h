@@ -13,6 +13,7 @@
 #import "RoadAssetPrice.h"
 
 @interface DeformationInfoViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,CaseIDHandler>
+@property (weak, nonatomic) IBOutlet UINavigationBar *navigationBar2;
 @property (nonatomic,copy) NSString * caseID;
 @property (weak, nonatomic) IBOutlet UITableView *roadAssetListView;
 @property (weak, nonatomic) IBOutlet UIPickerView *labelPicker;
@@ -27,7 +28,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnAddDeform;
 @property (weak, nonatomic) IBOutlet UILabel *labelPrice;
 @property (weak, nonatomic) IBOutlet UITextField *textPrice;
-
 //自定义路产视图outlet
 @property (weak, nonatomic) IBOutlet UIView *customRoadAssetSubView;
 @property (weak, nonatomic) IBOutlet UITextField *customRoadAssetNameTextField;

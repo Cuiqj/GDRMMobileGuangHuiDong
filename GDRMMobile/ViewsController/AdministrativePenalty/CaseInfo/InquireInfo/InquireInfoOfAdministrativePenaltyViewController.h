@@ -36,8 +36,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *textFieldInquirer;
 @property (weak, nonatomic) IBOutlet UITextField *textFieldRecorder;
 @property (weak, nonatomic) IBOutlet UITableView *caseInfoListView;
+@property (weak, nonatomic) IBOutlet UINavigationBar *navigationBar2;
 
-
+@property (weak, nonatomic) IBOutlet UINavigationBar *navigationBar;
 -(void)loadInquireInfoForCase:(NSString *)caseID andAnswererName:(NSString *)aAnswererName;
 -(void)loadInquireInfoForCase:(NSString *)caseID andNexus:(NSString *)aNexus;
 -(void)saveInquireInfoForCase:(NSString *)caseID andAnswererName:(NSString *)aAnswererName;

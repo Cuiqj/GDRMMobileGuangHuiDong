@@ -46,6 +46,12 @@
     [self.customRoadAssetSubView.layer setCornerRadius:4];
     [self.customRoadAssetSubView.layer setMasksToBounds:YES];
     
+	[_navigationBar2 setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    _navigationBar2.shadowImage = [[UIImage alloc] init];
+	
+	_labelPicker.transform = CGAffineTransformMakeScale(0.99, 0.91);
+	_labelPicker.layer.cornerRadius = 4.5;
+	
     NSString *imagePath=[[NSBundle mainBundle] pathForResource:@"蓝底按钮" ofType:@"png"];
     UIImage *btnImage=[[UIImage imageWithContentsOfFile:imagePath] resizableImageWithCapInsets:UIEdgeInsetsMake(20, 20, 20, 20)];
     [self.btnAddDeform setBackgroundImage:btnImage forState:UIControlStateNormal];

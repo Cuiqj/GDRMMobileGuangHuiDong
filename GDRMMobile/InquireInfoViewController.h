@@ -25,6 +25,8 @@
 -(IBAction)textTouched:(UITextField *)sender;
 
 
+@property (weak, nonatomic) IBOutlet UINavigationBar *navigationBar2;
+
 @property (weak, nonatomic) IBOutlet UIButton *uiButtonAdd;
 @property (weak, nonatomic) IBOutlet UITextView *inquireTextView;
 @property (weak, nonatomic) IBOutlet UITextField *textAsk;
@@ -36,6 +38,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *textFieldInquirer;
 @property (weak, nonatomic) IBOutlet UITextField *textFieldRecorder;
 @property (weak, nonatomic) IBOutlet UITableView *caseInfoListView;
+
 
 
 -(void)loadInquireInfoForCase:(NSString *)caseID andAnswererName:(NSString *)aAnswererName;

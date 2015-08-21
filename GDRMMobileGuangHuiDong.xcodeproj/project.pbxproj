@@ -534,7 +534,7 @@
 		33A09B0714FDB83C0096BA1D /* OrgSelectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrgSelectController.h; sourceTree = "<group>"; };
 		33A09B0814FDB83D0096BA1D /* OrgSelectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrgSelectController.m; sourceTree = "<group>"; };
 		33A09B0A14FDBD930096BA1D /* OrgSelectHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrgSelectHandler.h; sourceTree = "<group>"; };
-		33A5274614F4E3E6009BC91E /* GDRMMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GDRMMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		33A5274614F4E3E6009BC91E /* GDRMMobileGuangHuiDong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GDRMMobileGuangHuiDong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33A5274A14F4E3E6009BC91E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		33A5274C14F4E3E6009BC91E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		33A5274E14F4E3E6009BC91E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1219,7 +1219,7 @@
 		33A5274714F4E3E6009BC91E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				33A5274614F4E3E6009BC91E /* GDRMMobile.app */,
+				33A5274614F4E3E6009BC91E /* GDRMMobileGuangHuiDong.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1686,7 +1686,7 @@
 			);
 			name = GDRMMobileGuangHuiDong;
 			productName = GDRMMobile;
-			productReference = 33A5274614F4E3E6009BC91E /* GDRMMobile.app */;
+			productReference = 33A5274614F4E3E6009BC91E /* GDRMMobileGuangHuiDong.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */

@@ -78,7 +78,7 @@
     self.deformInfoVC=[self.storyboard instantiateViewControllerWithIdentifier:@"DeformBriefInfo"];
     self.deformInfoVC.delegate=self;
     self.deformInfoVC.viewLocal=1;
-    self.deformInfoVC.view.frame=CGRectMake(0, 260, 1024, 488);
+    self.deformInfoVC.view.frame=CGRectMake(0, 280, 1024, 488);
     [self.view addSubview:self.deformInfoVC.view];
     
     

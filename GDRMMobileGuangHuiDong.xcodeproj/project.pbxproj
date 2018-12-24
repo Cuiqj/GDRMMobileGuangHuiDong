@@ -1696,6 +1696,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0430;
+				TargetAttributes = {
+					33A5274514F4E3E6009BC91E = {
+						DevelopmentTeam = 27NSK65R5P;
+						ProvisioningStyle = Manual;
+					};
+				};
 			};
 			buildConfigurationList = 33A5274014F4E3E6009BC91E /* Build configuration list for PBXProject "GDRMMobileGuangHuiDong" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -2028,7 +2034,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = "-lxml2";
 				PROVISIONING_PROFILE = "3d765be2-ef97-434d-a007-3091d19481ab";
-				"PROVISIONING_PROFILE[sdk=*]" = "3d765be2-ef97-434d-a007-3091d19481ab";
+				"PROVISIONING_PROFILE[sdk=*]" = "90bbf38e-5dcd-46f2-ac62-edca226dc4bf";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -2053,8 +2059,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = "-lxml2";
-				PROVISIONING_PROFILE = "3d765be2-ef97-434d-a007-3091d19481ab";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3d765be2-ef97-434d-a007-3091d19481ab";
+				PROVISIONING_PROFILE = "90bbf38e-5dcd-46f2-ac62-edca226dc4bf";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "90bbf38e-5dcd-46f2-ac62-edca226dc4bf";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
@@ -2066,14 +2072,19 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Guangzhou Zhongjiao Yuke Spatial Information Technology Co., Ltd. (97S66GFTED)";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: Guangzhou Zhongjiao Yuke Spatial Information Technology Co., Ltd. (97S66GFTED)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 27NSK65R5P;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GDRMMobile/GDRMMobileGuangHuiDong-Prefix.pch";
 				HEADER_SEARCH_PATHS = /usr/include/libxml2/;
 				INFOPLIST_FILE = "GDRMMobile/GDRMMobileGuangHuiDong-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = GDRMMobileGuangHuiDong;
-				PROVISIONING_PROFILE = "6369a086-7c65-43af-babb-ac52a6f4fca5";
-				"PROVISIONING_PROFILE[sdk=*]" = "6369a086-7c65-43af-babb-ac52a6f4fca5";
+				PROVISIONING_PROFILE = "ec72549b-b660-4323-82f0-a61c459220dd";
+				"PROVISIONING_PROFILE[sdk=*]" = "90bbf38e-5dcd-46f2-ac62-edca226dc4bf";
+				PROVISIONING_PROFILE_SPECIFIER = AllProjectCanUsedevelopment;
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -2083,15 +2094,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Guangzhou Zhongjiao Yuke Spatial Information Technology Co., Ltd. (97S66GFTED)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Guangzhou Zhongjiao Yuke Spatial Information Technology Co., Ltd. (97S66GFTED)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 27NSK65R5P;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GDRMMobile/GDRMMobileGuangHuiDong-Prefix.pch";
 				HEADER_SEARCH_PATHS = /usr/include/libxml2/;
 				INFOPLIST_FILE = "GDRMMobile/GDRMMobileGuangHuiDong-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = GDRMMobileGuangHuiDong;
-				PROVISIONING_PROFILE = "6369a086-7c65-43af-babb-ac52a6f4fca5";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6369a086-7c65-43af-babb-ac52a6f4fca5";
+				PROVISIONING_PROFILE = "ec72549b-b660-4323-82f0-a61c459220dd";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "90bbf38e-5dcd-46f2-ac62-edca226dc4bf";
+				PROVISIONING_PROFILE_SPECIFIER = AllProjectCanUsedevelopment;
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				WRAPPER_EXTENSION = app;
 			};

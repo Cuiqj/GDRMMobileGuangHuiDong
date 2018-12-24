@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>EF042913-AEA4-4DD0-A3C7-9ABD09F3F3F3</string>
+	<key>IDESourceControlProjectName</key>
+	<string>GDRMMobileGuangHuiDong</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>820C5055-7327-4292-A805-766A987D26B6</key>
+		<string>http://192.168.0.243/GDRMMobileGuangHuiDong.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>GDRMMobileGuangHuiDong.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>820C5055-7327-4292-A805-766A987D26B6</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>http://192.168.0.243/GDRMMobileGuangHuiDong.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>820C5055-7327-4292-A805-766A987D26B6</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>820C5055-7327-4292-A805-766A987D26B6</string>
+			<key>IDESourceControlWCCName</key>
+			<string>GDRMMobileGuangHuiDong</string>
+		</dict>
+	</array>
+</dict>
+</plist>
